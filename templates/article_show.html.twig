@@ -1,0 +1,10 @@
+{% extends 'base.html.twig' %}
+
+{% block main %}
+    <article>
+        <h1>{{ article.title }}</h1>
+        <div>{{ article.content }}</div>
+        <p>{{ article.createdAt | date('y-m-d') }}</p>
+    </article>
+
+{% endblock main %}

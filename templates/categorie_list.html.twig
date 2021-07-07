@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block metaTitle %}
+Liste des articles
+{% endblock metaTitle %}
+{% block header %}
+<h2>Voici la liste des catégories :</h2>
+{% endblock header %}
+{% block main %}
+        {% for Categorie in Categories %}
+        {% if categorie.published %}
+            <article>
+                    <h2>{{ categorie.title | upper }}</h2>
+                <p>{{ categorie.content }}</p>
+            </article>
+        {% endif%}
+        {% endfor %}
+
+{% endblock main %}
+{% block footer %}
+<p>Copiright</p>
+{% endblock footer %}
