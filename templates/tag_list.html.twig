@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block metaTitle %}
+    Liste des articles
+{% endblock metaTitle %}
+
+
+{% block main %}
+    <div class="tag-container">
+    {% for tag in tags %}
+        <article class="tag">
+
+                <p style="background-color: {{ tag.color }}">{{ tag.title }}</p>
+
+        </article>
+    {% endfor %}
+    </div>
+{% endblock main %}

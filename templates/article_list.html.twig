@@ -12,7 +12,9 @@
             {% if article.isPublished %}
                 <article class="article">
                     <h2>{{ article.title | upper }}</h2>
+
                     <p>{{ article.content }}</p>
+                    <p>La categorie est : {{ article.category.title }}</p>
                 </article>
             {% endif %}
         {% endfor %}

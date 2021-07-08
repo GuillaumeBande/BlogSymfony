@@ -1,15 +1,14 @@
 <?php
 
-
 namespace App\Entity;
 
-
+use App\Repository\TagRepository;
 use Doctrine\ORM\Mapping as ORM;
 
-class Category
-    /**
-     * @ORM\Entity()
-     */
+/**
+ * @ORM\Entity(repositoryClass=TagRepository::class)
+ */
+class Tag
 {
     /**
      * @ORM\Id
@@ -24,19 +23,9 @@ class Category
     private $title;
 
     /**
-     * @ORM\Column(type="datetime")
-     */
-    private $createdAt;
-
-    /**
      * @ORM\Column(type="string", length=255)
      */
-    private $content;
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $published;
+    private $color;
 
     public function getId(): ?int
     {
@@ -55,26 +44,14 @@ class Category
         return $this;
     }
 
-    public function getContent(): ?string
+    public function getColor(): ?string
     {
-        return $this->content;
+        return $this->color;
     }
 
-    public function setContent(string $content): self
+    public function setColor(string $color): self
     {
-        $this->content = $content;
-
-        return $this;
-    }
-
-    public function getPublished(): ?string
-    {
-        return $this->published;
-    }
-
-    public function setPublished(string $published): self
-    {
-        $this->published = $published;
+        $this->color = $color;
 
         return $this;
     }
