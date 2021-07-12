@@ -39,7 +39,7 @@ class Article
     private $isPublished;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Category")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Category", inversedBy="articles")
      */
     private $category;
 
@@ -47,6 +47,12 @@ class Article
     {
         return $this->isPublished;
     }
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\tag", inversedBy="tag")
+     */
+    private $tag;
+    
 
     public function setIsPublished(?bool $isPublished): self
     {
@@ -127,6 +133,9 @@ class Article
         $this->category = $category;
     }
 
+    public function setCreateAt($DateTime)
+    {
+    }
 
 
 }

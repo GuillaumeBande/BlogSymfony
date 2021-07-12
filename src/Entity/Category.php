@@ -4,6 +4,7 @@
 namespace App\Entity;
 
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 class Category
@@ -27,6 +28,17 @@ class Category
      * @ORM\Column(type="datetime")
      */
     private $createdAt;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Article", mappedBy="category")
+     */
+    private $articles;
+
+    public function __construct()
+    {
+        $this->articles = new ArrayCollection();
+    }
+
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -78,4 +90,14 @@ class Category
 
         return $this;
     }
+
+    /**
+     * @return
+     */
+    public function getArticles()
+    {
+        return $this->articles;
+    }
+
+
 }

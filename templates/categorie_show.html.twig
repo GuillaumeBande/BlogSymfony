@@ -1,16 +1,24 @@
 {% extends 'base.html.twig' %}
 
-{% block metaTitle %}Liste des objets{% endblock metaTitle %}
+{% block metaTitle %}
+    <h2>Liste des objets</h2>
+{% endblock metaTitle %}
 
 {% block header %}
     <h2>Ceci est le titre</h2>
 {% endblock header %}
 
 {% block main %}
-    <article>
-        <h1>{{ article.title }}</h1>
-    </article>
+<div class="articles-container">
+    {{ category.title }}
+
+    {% for article in category.articles %}
+        <p>{{ article.title }}</p>
+    {% endfor %}
+
+</div>
 {% endblock main %}
+
 {% block footer %}
     <p>Ceci est le bas de page</p>
 {% endblock footer %}
