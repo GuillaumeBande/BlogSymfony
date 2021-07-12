@@ -12,15 +12,21 @@ use Symfony\Component\Validator\Constraints\DateTime;
 
 class ArticleController extends AbstractController
 {
+    //Je défini la route (le lien http) pour aller sur la page
     /**
      * @Route("/insert", name="insert")
      */
+    //Je crée une nouvelle fonction avec en parametre "EntityManagerInterface" pour pouvoir modifier des données dans la BDD
     public function insertArticle(EntityManagerInterface $entityManager)
     {
         $article = new Article();
+        //J'ajoute dans le champs title un nouveau titre
         $article->setTitle('Titre depuis le controlleur');
+        //J'ajoute dans le champs content un nouveau contenu
         $article->setContent('un content');
+        //Je lui dis s'il est publier ou nous (ici, oui il est publié car 1=oui, 0=non)
         $article->setIsPublished('1');
+        //Je défini une nouvelle date (ici, l'heure actuel)
         $article->setCreatedAt(new \DateTime('NOW'));
 
 
@@ -37,7 +43,7 @@ class ArticleController extends AbstractController
     public function updateTitle($id, ArticleRepository $articleRepository, EntityManagerInterface $entityManager)
     {
         $article = $articleRepository->find($id);
-        if ($article)
+        if ($article=$article)
         {
             $article->setTitle('TEst du nouveau titre');
             $entityManager->persist($article);
@@ -54,12 +60,10 @@ class ArticleController extends AbstractController
     public function udpdatePublished0($id, ArticleRepository $articleRepository, EntityManagerInterface $entityManager)
     {
         $article = $articleRepository->find($id);
-        if ($article)
-        {
             $article->setIsPublished('0');
             $entityManager->persist($article);
             $entityManager->flush();
-        }
+
         return $this->redirectToRoute('articleList');
     }
 
@@ -69,12 +73,11 @@ class ArticleController extends AbstractController
     public function udpdatePublished1($id, ArticleRepository $articleRepository, EntityManagerInterface $entityManager)
     {
         $article = $articleRepository->find($id);
-        if ($article)
-        {
+
             $article->setIsPublished('1');
             $entityManager->persist($article);
             $entityManager->flush();
-        }
+
         return $this->redirectToRoute('articleList');
     }
 
@@ -86,17 +89,26 @@ class ArticleController extends AbstractController
     public function updateContent($id, ArticleRepository $articleRepository, EntityManagerInterface $entityManager)
     {
         $article = $articleRepository->find($id);
-        if ($article)
-        {
+
             $article->setContent('Nouveau contenue de l article');
             $entityManager->persist($article);
             $entityManager->flush();
-        }
 
         return $this->redirectToRoute('articleList');
     }
 
+    /**
+     * @Route("/articles/delete/{id}"), name="articleDelete")
+     */
+public function deleteArticle($id, ArticleRepository  $articleRepository, EntityManagerInterface $entityManager)
+{
+    $article=$articleRepository->find($id);
 
+    $entityManager->remove($article);
+    $entityManager->flush();
+
+    return $this->redirectToRoute('articleList');
+}
 
     /**
      * @Route("/articles", name="articleList")
