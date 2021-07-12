@@ -137,5 +137,10 @@ class Article
     {
     }
 
+    public function setPublished(string $string)
+    {
+        $this->isPublished;
+    }
+
 
 }

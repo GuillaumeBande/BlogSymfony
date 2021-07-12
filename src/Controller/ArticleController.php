@@ -47,6 +47,39 @@ class ArticleController extends AbstractController
         return $this->redirectToRoute('articleList');
     }
 
+
+    /**
+     * @Route ("/articles/update/published0/{id}", name="articleUpdatePublished0")
+     */
+    public function udpdatePublished0($id, ArticleRepository $articleRepository, EntityManagerInterface $entityManager)
+    {
+        $article = $articleRepository->find($id);
+        if ($article)
+        {
+            $article->setIsPublished('0');
+            $entityManager->persist($article);
+            $entityManager->flush();
+        }
+        return $this->redirectToRoute('articleList');
+    }
+
+    /**
+     * @Route ("/articles/update/published1/{id}", name="articleUpdatePublished1")
+     */
+    public function udpdatePublished1($id, ArticleRepository $articleRepository, EntityManagerInterface $entityManager)
+    {
+        $article = $articleRepository->find($id);
+        if ($article)
+        {
+            $article->setIsPublished('1');
+            $entityManager->persist($article);
+            $entityManager->flush();
+        }
+        return $this->redirectToRoute('articleList');
+    }
+
+
+
     /**
      * @Route("/articles/update/content/{id}", name="articleUpdateContent")
      */
