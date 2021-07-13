@@ -6,6 +6,7 @@ use App\Entity\Article;
 use App\Form\ArticleType;
 use App\Repository\ArticleRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use phpDocumentor\Reflection\Types\This;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -18,15 +19,27 @@ class AdminArticleController extends AbstractController
      * @Route("/admin/insert", name="AdminInsert")
      */
     //Je crée une nouvelle fonction avec en parametre "EntityManagerInterface" pour pouvoir modifier des données dans la BDD
-    public function insertArticle()
+    public function insertArticle(Request $request, EntityManagerInterface $entityManager)
     {
         $article = new Article();
 
         $articleForm = $this->createForm(ArticleType::class, $article);
 
+        $articleForm->handleRequest($request);
+
+
+       //Si tous les champs sont remplis et que le formulaire a correctement été remplis, on envois le formulaire
+        if ( $articleForm->isSubmitted() && $articleForm->isValid()) {
+            $entityManager->persist($article);
+            $entityManager->flush();
+
+            return $this->redirectToRoute('AdminArticleList');
+        }
+
         return $this->render('admin/admin_insert.html.twig', [
             'articleForm' => $articleForm->createView()
         ]);
+
     }
 
     /**
