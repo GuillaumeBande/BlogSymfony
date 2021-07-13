@@ -124,7 +124,7 @@ public function deleteArticle($id, ArticleRepository  $articleRepository, Entity
         // suivi de la variable dans laquelle je veux que sf m'instancie la classe
         $articles = $articleRepository->findAll();
 
-        return $this->render('admin_article_list.html.twig', [
+        return $this->render('article_list.html.twig', [
             'articles' => $articles
         ]);
 
@@ -141,7 +141,7 @@ public function deleteArticle($id, ArticleRepository  $articleRepository, Entity
         // afficher un article en fonction de l'id renseigné dans l'url (en wildcard)
         $article = $articleRepository->find($id);
 
-        return $this->render('admin_article_show.html.twig', [
+        return $this->render('article_show.html.twig', [
             'article' => $article
         ]);
     }

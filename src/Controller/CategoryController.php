@@ -18,7 +18,7 @@ class CategoryController extends AbstractController
     public function categoryList(CategoryRepository $categoryRepository): Response //l'autowire
     {
         $category = $categoryRepository->findAll();
-        return $this->render('admin_categorie_list.html.twig', [
+        return $this->render('categorie_list.html.twig', [
             'category' => $category
         ]);
 
@@ -36,7 +36,7 @@ class CategoryController extends AbstractController
             throw new NotFoundHttpException();
         };
 
-        return $this->render('admin_categorie_show.html.twig', [
+        return $this->render('categorie_show.html.twig', [
             'category' => $category
         ]);
 

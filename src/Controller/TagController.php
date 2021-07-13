@@ -22,7 +22,7 @@ class TagController extends AbstractController
         $tags = $tagRepository->findAll();
 
         //dump('test'); die; => ici je test la function et Route
-        return $this->render('admin_tag_list.html.twig', [
+        return $this->render('tag_list.html.twig', [
             'tags' => $tags
         ]);
     }
@@ -43,7 +43,7 @@ class TagController extends AbstractController
         };
 
         //dump('test'); die; => ici je test la function et Route
-        return $this->render('admin_tag_show.html.twig', [
+        return $this->render('tag_show.html.twig', [
             'tag' => $tag
         ]);
     }
