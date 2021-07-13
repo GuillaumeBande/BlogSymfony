@@ -1,20 +1,21 @@
 <?php
-//
-//  Pour tag c'est OneToMany
-//
 
 
-namespace App\Controller;
+
+namespace App\Controller\admin;
 
 use App\Repository\TagRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Annotation\Route;
 
-class TagController extends AbstractController
+//
+//  Pour tag c'est OneToMany
+//
+class AdminTagController extends AbstractController
 {
 /**
-* @Route("/tags", name="tags")
+* @Route("/admin/tags", name="admin_tags")
 */
     public function TagsBlog(TagRepository $tagRepository): \Symfony\Component\HttpFoundation\Response
     {
@@ -22,14 +23,14 @@ class TagController extends AbstractController
         $tags = $tagRepository->findAll();
 
         //dump('test'); die; => ici je test la function et Route
-        return $this->render('admin_tag_list.html.twig', [
+        return $this->render('admin/admin_tag_list.html.twig', [
             'tags' => $tags
         ]);
     }
 
 
 /**
-* @Route("/tags/{id}", name="tagShow")
+* @Route("/admin/tags/{id}", name="admin_tagShow")
 */
     public function Tagid($id, TagRepository $tagRepository): \Symfony\Component\HttpFoundation\Response
         //l'autowire permet d'instancier (tipier = va recuperer l'intancier)
@@ -43,7 +44,7 @@ class TagController extends AbstractController
         };
 
         //dump('test'); die; => ici je test la function et Route
-        return $this->render('admin_tag_show.html.twig', [
+        return $this->render('admin/admin_tag_show.html.twig', [
             'tag' => $tag
         ]);
     }

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controller\admin;
 
 use App\Entity\Article;
 use App\Repository\ArticleRepository;
@@ -10,11 +10,11 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Validator\Constraints\DateTime;
 
-class ArticleController extends AbstractController
+class AdminArticleController extends AbstractController
 {
     //Je défini la route (le lien http) pour aller sur la page
     /**
-     * @Route("/insert", name="insert")
+     * @Route("/admin/insert", name="AdminInsert")
      */
     //Je crée une nouvelle fonction avec en parametre "EntityManagerInterface" pour pouvoir modifier des données dans la BDD
     public function insertArticle(EntityManagerInterface $entityManager)
@@ -34,11 +34,11 @@ class ArticleController extends AbstractController
         $entityManager->persist($article);
         $entityManager->flush();
 
-        dump(die('OK'));
+        return $this->redirectToRoute('AdminArticleList');
     }
 
     /**
-     * @Route("/articles/update/title/{id}", name="articleUpdateTitle")
+     * @Route("/admin/articles/update/title/{id}", name="admin_articleUpdateTitle")
      */
     public function updateTitle($id, ArticleRepository $articleRepository, EntityManagerInterface $entityManager)
     {
@@ -50,12 +50,12 @@ class ArticleController extends AbstractController
             $entityManager->flush();
         }
 
-        return $this->redirectToRoute('articleList');
+        return $this->redirectToRoute('AdminArticleList');
     }
 
 
     /**
-     * @Route ("/articles/update/published0/{id}", name="articleUpdatePublished0")
+     * @Route ("/admin/articles/update/published0/{id}", name="admin_articleUpdatePublished0")
      */
     public function udpdatePublished0($id, ArticleRepository $articleRepository, EntityManagerInterface $entityManager)
     {
@@ -64,11 +64,11 @@ class ArticleController extends AbstractController
             $entityManager->persist($article);
             $entityManager->flush();
 
-        return $this->redirectToRoute('articleList');
+        return $this->redirectToRoute('AdminArticleList');
     }
 
     /**
-     * @Route ("/articles/update/published1/{id}", name="articleUpdatePublished1")
+     * @Route ("/admin/articles/update/published1/{id}", name="admin_articleUpdatePublished1")
      */
     public function udpdatePublished1($id, ArticleRepository $articleRepository, EntityManagerInterface $entityManager)
     {
@@ -78,13 +78,13 @@ class ArticleController extends AbstractController
             $entityManager->persist($article);
             $entityManager->flush();
 
-        return $this->redirectToRoute('articleList');
+        return $this->redirectToRoute('AdminArticleList');
     }
 
 
 
     /**
-     * @Route("/articles/update/content/{id}", name="articleUpdateContent")
+     * @Route("/admin/articles/update/content/{id}", name="AdminArticleUpdateContent")
      */
     public function updateContent($id, ArticleRepository $articleRepository, EntityManagerInterface $entityManager)
     {
@@ -94,11 +94,11 @@ class ArticleController extends AbstractController
             $entityManager->persist($article);
             $entityManager->flush();
 
-        return $this->redirectToRoute('articleList');
+        return $this->redirectToRoute('AdminArticleList');
     }
 
     /**
-     * @Route("/articles/delete/{id}"), name="articleDelete")
+     * @Route("admin/articles/delete/{id}" , name="adminArticleDelete")
      */
 public function deleteArticle($id, ArticleRepository  $articleRepository, EntityManagerInterface $entityManager)
 {
@@ -107,11 +107,11 @@ public function deleteArticle($id, ArticleRepository  $articleRepository, Entity
     $entityManager->remove($article);
     $entityManager->flush();
 
-    return $this->redirectToRoute('articleList');
+    return $this->redirectToRoute('AdminArticleList');
 }
 
     /**
-     * @Route("/articles", name="articleList")
+     * @Route("/admin/articles", name="AdminArticleList")
      */
 
     public function articleList(ArticleRepository $articleRepository)
@@ -124,7 +124,7 @@ public function deleteArticle($id, ArticleRepository  $articleRepository, Entity
         // suivi de la variable dans laquelle je veux que sf m'instancie la classe
         $articles = $articleRepository->findAll();
 
-        return $this->render('admin_article_list.html.twig', [
+        return $this->render('admin\admin_article_list.html.twig', [
             'articles' => $articles
         ]);
 
@@ -134,36 +134,17 @@ public function deleteArticle($id, ArticleRepository  $articleRepository, Entity
 
 
     /**
-     * @Route("/articles/{id}", name="articleShow")
+     * @Route("/admin/articles/{id}", name="admin_articleShow")
      */
     public function articleShow($id, ArticleRepository $articleRepository)
     {
         // afficher un article en fonction de l'id renseigné dans l'url (en wildcard)
         $article = $articleRepository->find($id);
 
-        return $this->render('admin_article_show.html.twig', [
+        return $this->render('admin/admin_article_show.html.twig', [
             'article' => $article
         ]);
     }
 
-    /**
-     * @Route("/search", name="search")
-     */
-
-    public function search(ArticleRepository $articleRepository, Request $request)
-    {
-        //declaration de la variable qui stocke le mot rechercher en dur
-        $term = $request->query->get('q');
-
-        //declaration variable : stocker les éléments retournés via repository en fonction de $term
-        $articles = $articleRepository->searchByTerm($term);
-
-        //Methode pour renvoi de la reponse de la requete repository
-        return $this->render('articleSearch.html.twig' , [
-            'articles' => $articles,
-            'term' => $term
-        ]);
-
-    }
 
 }

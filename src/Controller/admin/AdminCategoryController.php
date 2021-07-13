@@ -1,7 +1,7 @@
 <?php
 
 
-namespace App\Controller;
+namespace App\Controller\admin;
 
 
 use App\Repository\CategoryRepository;
@@ -10,22 +10,22 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Annotation\Route;
 
-class CategoryController extends AbstractController
+class AdminCategoryController extends AbstractController
 {
 /**
-* @Route("/category", name="categoryList")
+* @Route("/admin/category", name="admin_categoryList")
 */
     public function categoryList(CategoryRepository $categoryRepository): Response //l'autowire
     {
         $category = $categoryRepository->findAll();
-        return $this->render('admin_categorie_list.html.twig', [
+        return $this->render('admin/admin_categorie_list.html.twig', [
             'category' => $category
         ]);
 
     }
 
 /**
-* @Route("/category/{id}", name="categoryShow")//utilisation de la wildcard
+* @Route("/admin/category/{id}", name="admin_categoryShow")
 */
     public function categoryShow($id, CategoryRepository $categoryRepository): Response
     {
@@ -36,7 +36,7 @@ class CategoryController extends AbstractController
             throw new NotFoundHttpException();
         };
 
-        return $this->render('admin_categorie_show.html.twig', [
+        return $this->render('admin/admin_categorie_show.html.twig', [
             'category' => $category
         ]);
 

@@ -1,0 +1,23 @@
+{% extends 'admin/admin_base.html.twig' %}
+
+{% block metaTitle %}
+<h2>Liste des catégories</h2>
+{% endblock metaTitle %}
+{% block header %}
+<h2>Voici la liste des catégories :</h2>
+{% endblock header %}
+{% block main %}
+        {% for category in category %}
+        {% if category.published %}
+            <article>
+                    <h2>{{ category.title }}</h2>
+                <p>{{ category.content }}</p>
+            </article>
+        {% endif %}
+        {% endfor %}
+
+
+{% endblock main %}
+{% block footer %}
+<p>Copiright</p>
+{% endblock footer %}

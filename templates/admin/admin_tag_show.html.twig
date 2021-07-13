@@ -1,0 +1,12 @@
+{% extends 'admin/admin_base.html.twig' %}
+
+{% block main %}
+    <article class="tag">
+
+        <p style="background-color: {{ tag.color }}">{{ tag.title }}</p>
+        {% for article in tag.articles %}
+            <p>{{ article.title }}</p>
+        {% endfor %}
+    </article>
+
+{% endblock main %}

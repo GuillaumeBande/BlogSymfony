@@ -1,0 +1,12 @@
+{% extends 'admin/admin_base.html.twig' %}
+
+{% block main %}
+    <article>
+        <h1>{{ article.title }}</h1>
+        <div>{{ article.content }}</div>
+        <p>{{ article.createdAt | date('y-m-d') }}</p>
+        <a href="{{ path('adminArticleDelete', {'id' : article.id} ) }}">Supprimer</a>
+        <a href="{{ path('AdminArticleUpdateContent', {'id' : article.id} ) }}">Modifier</a>
+    </article>
+
+{% endblock main %}
