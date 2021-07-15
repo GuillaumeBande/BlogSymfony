@@ -5,6 +5,7 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\ArticleRepository;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=ArticleRepository::class)
@@ -20,11 +21,24 @@ class Article
 
     /**
      * @ORM\Column(type="string")
+     * @Assert\NotBlank(message="Rempli le titre PUT1")
+     * *@Assert\Length(
+     *              min = 2,
+     *              max = 10,
+     *              minMessage = "Vous devez écrire plus de {{ limit }} caractères.",
+     *              maxMessage = "Vous ne pouvez pas ecrire plus de {{ limit }} caractères"
+     *              )
      */
     private $title;
 
     /**
      * @ORM\Column(type="text")
+     *@Assert\Length(
+     *              min = 2,
+     *              max = 50,
+     *              minMessage = "Vous devez écrire plus de {{ limit }} caractères.",
+     *              maxMessage = "Vous ne pouvez pas ecrire plus de {{ limit }} caractères"
+     *              )
      */
     private $content;
 
@@ -48,11 +62,11 @@ class Article
         return $this->isPublished;
     }
 
+
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\tag", inversedBy="tag")
+     * @ORM\ManyToOne(targetEntity=Tag::class, inversedBy="yes")
      */
     private $tag;
-    
 
     public function setIsPublished(?bool $isPublished): self
     {
@@ -141,6 +155,16 @@ class Article
     {
         $this->isPublished;
     }
+    public function getTag(): ?Tag
+    {
+        return $this->tag;
+    }
 
+    public function setTag(?Tag $tag): self
+    {
+        $this->tag = $tag;
+
+        return $this;
+    }
 
 }

@@ -3,6 +3,8 @@
 namespace App\Form;
 
 use App\Entity\Article;
+use App\Entity\Category;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
@@ -17,22 +19,34 @@ class ArticleType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
+
             ->add('title', TextType::class, [
                 'label' => 'Titre'
             ])
+
             ->add('content', TextareaType::class, [
                 'label' => 'Contenu'
             ])
+
             ->add('createdAt', DateType::class, [
                 'widget' => 'single_text',
                 'label' => "Date de création",
                 'data' => new \DateTime('NOW')
             ])
+
             ->add('isPublished', CheckboxType::class, [
                 'label' => 'Publié ?',
                 'data' => true
             ])
+
             ->add('submit', SubmitType::class)
+
+            ->add('category', EntityType::class, [
+                'class' => Category::class,
+                'choice_label' => 'title'
+            ])
+
+
         ;
     }
 

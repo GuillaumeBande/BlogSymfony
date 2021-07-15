@@ -63,3 +63,8 @@ a{
     color: green;
     background-color: yellow;
 }
+.errors {
+    color: red;
+    list-style-type: none;
+    font-size: 1.3em;
+}

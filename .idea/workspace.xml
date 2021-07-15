@@ -2,27 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c5507162-b321-444e-be17-766cc807d909" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/public/style_form.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Form/CategoryType.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/admin_category/_delete_form.html.twig" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/admin_category/_form.html.twig" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/admin_category/base.html.twig" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/admin_category/edit.html.twig" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/admin_category/index.html.twig" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/admin_category/new.html.twig" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/admin_category/show.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/ExoSymfony.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/ExoSymfony.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/symfony2.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/admin/form/form_errors.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/style.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/admin/AdminArticleController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/admin/AdminArticleController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/admin/AdminCategoryController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/admin/AdminCategoryController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/Category.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Category.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Entity/Article.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Article.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Form/ArticleType.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Form/ArticleType.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/admin/admin_article_list.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/admin/admin_article_list.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/admin/admin_article_show.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/admin/admin_article_show.html.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/admin/admin_base.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/admin/admin_base.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/admin/admin_categorie_list.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/admin/admin_categorie_list.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/admin/admin_categorie_show.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/admin/admin_categorie_show.html.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/admin/admin_insert.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/admin/admin_insert.html.twig" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -30,7 +16,7 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ComposerSettings" synchronizationState="SYNCHRONIZE">
+  <component name="ComposerSettings" doNotAsk="true" synchronizationState="SYNCHRONIZE">
     <pharConfigPath>$PROJECT_DIR$/composer.json</pharConfigPath>
     <execution />
   </component>
@@ -178,9 +164,12 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="ASKED_SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RunManager">
@@ -197,7 +186,8 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1626336361398</updated>
-      <workItem from="1626336363104" duration="11441000" />
+      <workItem from="1626336363104" duration="17979000" />
+      <workItem from="1626359421013" duration="1139000" />
     </task>
     <servers />
   </component>
@@ -214,5 +204,6 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
 </project>

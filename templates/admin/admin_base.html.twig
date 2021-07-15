@@ -20,6 +20,29 @@
     {% endblock main %}
 </main>
 <footer class="footer">
+    {% block footer %}
+        <script>
+        function limiteur()
+        {
+        maximum = 10;
+        champ = document.add_quote.citation_content;
+        indic = document.add_quote.indicateur;
+
+        if (champ.value.length > maximum)
+        champ.value = champ.value.substring(0, maximum);
+        else
+        indic.value = maximum - champ.value.length;
+        }
+        </script>
+
+            <textarea class="citation_content" name="citation_content" id="citation_content" onKeyDown="limiteur();" onKeyUp="limiteur();"></textarea>
+            <br /><br />
+            Il vous reste <input readonly type=text name="indicateur" size="3" value="10"> caractères
+            <br /><br />
+            <input name="submit" type="submit" value="Ajouter la citation" class="submit"/>
+
+        </form>
+    {% endblock footer %}
 </footer>
 </body>
 </html>
