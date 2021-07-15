@@ -3,42 +3,94 @@
 
 namespace App\Controller\admin;
 
-
+use App\Entity\Category;
+use App\Form\CategoryType;
 use App\Repository\CategoryRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Annotation\Route;
 
+/**
+ * @Route("/admin/category")
+ */
 class AdminCategoryController extends AbstractController
 {
-/**
-* @Route("/admin/category", name="admin_categoryList")
-*/
-    public function categoryList(CategoryRepository $categoryRepository): Response //l'autowire
+    /**
+     * @Route("/", name="admin_category_index", methods={"GET"})
+     */
+    public function index(CategoryRepository $categoryRepository): Response
     {
-        $category = $categoryRepository->findAll();
-        return $this->render('admin/admin_categorie_list.html.twig', [
-            'category' => $category
+        return $this->render('admin_category/index.html.twig', [
+            'categories' => $categoryRepository->findAll(),
         ]);
-
     }
 
-/**
-* @Route("/admin/category/{id}", name="admin_categoryShow")
-*/
-    public function categoryShow($id, CategoryRepository $categoryRepository): Response
+    /**
+     * @Route("/new", name="admin_category_new", methods={"GET","POST"})
+     */
+    public function new(Request $request): Response
     {
-        $category = $categoryRepository->find($id);
+        $category = new Category();
+        $form = $this->createForm(CategoryType::class, $category);
+        $form->handleRequest($request);
 
-        //Si le tag n'existe pas => renvoie une error exception en affichant erreur 404
-        if (is_null($category)) {
-            throw new NotFoundHttpException();
-        };
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($category);
+            $entityManager->flush();
 
-        return $this->render('admin/admin_categorie_show.html.twig', [
-            'category' => $category
+            return $this->redirectToRoute('admin_category_index', [], Response::HTTP_SEE_OTHER);
+        }
+
+        return $this->renderForm('admin_category/new.html.twig', [
+            'category' => $category,
+            'form' => $form,
         ]);
+    }
 
+    /**
+     * @Route("/{id}", name="admin_category_show", methods={"GET"})
+     */
+    public function show(Category $category): Response
+    {
+        return $this->render('admin_category/show.html.twig', [
+            'category' => $category,
+        ]);
+    }
+
+    /**
+     * @Route("/{id}/edit", name="admin_category_edit", methods={"GET","POST"})
+     */
+    public function edit(Request $request, Category $category): Response
+    {
+        $form = $this->createForm(CategoryType::class, $category);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $this->getDoctrine()->getManager()->flush();
+
+            return $this->redirectToRoute('admin_category_index', [], Response::HTTP_SEE_OTHER);
+        }
+
+        return $this->renderForm('admin_category/edit.html.twig', [
+            'category' => $category,
+            'form' => $form,
+        ]);
+    }
+
+    /**
+     * @Route("/{id}", name="admin_category_delete", methods={"POST"})
+     */
+    public function delete(Request $request, Category $category): Response
+    {
+        if ($this->isCsrfTokenValid('delete'.$category->getId(), $request->request->get('_token'))) {
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->remove($category);
+            $entityManager->flush();
+        }
+
+        return $this->redirectToRoute('admin_category_index', [], Response::HTTP_SEE_OTHER);
     }
 }

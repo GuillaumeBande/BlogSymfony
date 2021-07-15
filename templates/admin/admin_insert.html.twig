@@ -1,7 +1,35 @@
 {% extends 'admin/admin_base.html.twig' %}
 
+
 {% block main %}
 
-    {{ form(articleForm) }}
+
+    {# équivalent de la balise d'ouverture du form #}
+    {{ form_start(articleForm) }}
+
+        <div class="form-group">
+            {#permet de rendre le label du champs title #}
+            {{ form_label(articleForm.title, 'Titre de l\'article', {'label_attr':{'class':'style'}}) }}
+            {#permet de rendre l'input du champs title #}
+            {{ form_widget(articleForm.title, {'attr':{'class':'form-control'}}) }}
+        </div>
+        <div class="form-group">
+            {{ form_label(articleForm.content, 'Contenu', {'label_attr': {'class':'style'}}) }}
+            {{ form_widget(articleForm.content, {'attr': {'class': 'form-control', 'placeholder': 'remplissez le contenu'}}) }}
+        </div>
+        <div class="form-group">
+            {{ form_widget(articleForm.createdAt, {'attr':{'class':'form-control'}}) }}
+        </div>
+        <div class="form-group">
+            {{ form_label(articleForm.isPublished, 'Publication de l\'article', {'label_attr':{'class':'style'}}) }}
+            {{ form_widget(articleForm.isPublished, {'attr':{'class':'form-control'}}) }}
+        </div>
+        <div class="form-group">
+            {{ form_widget(articleForm.submit, {'attr': {'class': 'form-control btn btn-dark'}, 'label': 'sauvegarder'}) }}
+        </div>
+    {# équivalent de la balise de fermeture du form #}
+    {{ form_end(articleForm) }}
+
+    <p><a href="{{ path('AdminArticleList' ) }}">Retour a la liste d'article</a></p>
 
 {% endblock %}

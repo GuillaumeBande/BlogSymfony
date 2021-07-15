@@ -16,7 +16,7 @@ class AdminArticleController extends AbstractController
 {
     //Je défini la route (le lien http) pour aller sur la page
     /**
-     * @Route("/admin/insert", name="AdminInsert")
+     * @Route("/admin/articles/insert", name="AdminInsert")
      */
     //Je crée une nouvelle fonction avec en parametre "EntityManagerInterface" pour pouvoir modifier des données dans la BDD
     public function insertArticle(Request $request, EntityManagerInterface $entityManager)
@@ -32,13 +32,37 @@ class AdminArticleController extends AbstractController
         if ( $articleForm->isSubmitted() && $articleForm->isValid()) {
             $entityManager->persist($article);
             $entityManager->flush();
-
+            //on le renvoi vers la route d'affichage de la liste des articles d'admin
             return $this->redirectToRoute('AdminArticleList');
         }
 
         return $this->render('admin/admin_insert.html.twig', [
             'articleForm' => $articleForm->createView()
         ]);
+
+    }
+
+    public function updateArticle($id, ArticleRepository $articleRepository, Request $request, EntityManagerInterface $entityManager)
+    {
+        $article = $articleRepository->find($id);
+
+        $articleForm = $this->createForm(ArticleType::class, $article);
+
+        $articleForm->handleRequest($request);
+
+
+        //Si tous les champs sont remplis et que le formulaire a correctement été remplis, on envois le formulaire
+        if ( $articleForm->isSubmitted() && $articleForm->isValid()) {
+            $entityManager->persist($article);
+            $entityManager->flush();
+            //on le renvoi vers la route d'affichage de la liste des articles d'admin
+            return $this->render('admin/admin_insert.html.twig', [
+                'articleForm' => $articleForm->createView()
+            ]);
+
+        }
+        return $this->redirectToRoute('AdminArticleList');
+
 
     }
 
@@ -93,7 +117,7 @@ public function deleteArticle($id, ArticleRepository  $articleRepository, Entity
 
 
     /**
-     * @Route("/admin/articles/{id}", name="admin_articleShow")
+     * @Route("/admin/articles/show/{id}", name="admin_articleShow")
      */
     public function articleShow($id, ArticleRepository $articleRepository)
     {

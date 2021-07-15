@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<link rel="stylesheet" href="../../public/style_form.css">
+
+<title>New Category</title>
+
+{% block body %}
+    <h1>Création de la nouvelle catégorie :</h1>
+
+    {{ include('admin_category/_form.html.twig') }}
+
+    <a href="{{ path('admin_category_index') }}">Retour a la liste</a>
+{% endblock %}

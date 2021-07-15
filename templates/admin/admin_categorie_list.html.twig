@@ -1,4 +1,4 @@
-{% extends 'admin_base.html.twig' %}
+{% extends 'admin/admin_base.html.twig' %}
 
 {% block metaTitle %}
 <h2>Liste des catégories</h2>
@@ -9,10 +9,19 @@
 {% block main %}
         {% for category in category %}
         {% if category.published %}
-            <article>
-                    <h2>{{ category.title }}</h2>
+
+            <article class="article">
+                <h2>{{ category.title | upper }}</h2>
                 <p>{{ category.content }}</p>
+                <div class="Supprimer">
+                    <a href="{{ path('admin_category_delete', {'id' : category.id} ) }}">Supprimer</a>
+                </div>
+                <div class="Modifier">
+                    <a href="{{ path('AdminArticleUpdateContent', {'id' : category.id} ) }}">Modifier</a>
+                </div>
+
             </article>
+
         {% endif %}
         {% endfor %}
 
@@ -21,3 +30,4 @@
 {% block footer %}
 <p>Copiright</p>
 {% endblock footer %}
+

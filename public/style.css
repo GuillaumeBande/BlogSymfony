@@ -52,5 +52,14 @@
     transform: translateX(-80px);
     transition: transform 4000ms;
     z-index: -5;
-
+}
+a{
+    text-decoration: none;
+}
+.style{
+   color: red;
+}
+.btn {
+    color: green;
+    background-color: yellow;
 }

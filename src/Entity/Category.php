@@ -1,16 +1,15 @@
 <?php
 
-
 namespace App\Entity;
 
-
+use App\Repository\CategoryRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
+/**
+ * @ORM\Entity(repositoryClass=CategoryRepository::class)
+ */
 class Category
-    /**
-     * @ORM\Entity()
-     */
 {
     /**
      * @ORM\Id
@@ -39,17 +38,6 @@ class Category
         $this->articles = new ArrayCollection();
     }
 
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $content;
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $published;
-
     public function getId(): ?int
     {
         return $this->id;
@@ -67,37 +55,30 @@ class Category
         return $this;
     }
 
-    public function getContent(): ?string
+    /**
+     * @return mixed
+     */
+    public function getCreatedAt()
     {
-        return $this->content;
-    }
-
-    public function setContent(string $content): self
-    {
-        $this->content = $content;
-
-        return $this;
-    }
-
-    public function getPublished(): ?string
-    {
-        return $this->published;
-    }
-
-    public function setPublished(string $published): self
-    {
-        $this->published = $published;
-
-        return $this;
+        return $this->createdAt;
     }
 
     /**
-     * @return
+     * @param mixed $createdAt
+     */
+    public function setCreatedAt($createdAt): void
+    {
+        $this->createdAt = $createdAt;
+    }
+
+    /**
+     * @return mixed
      */
     public function getArticles()
     {
         return $this->articles;
     }
+
 
 
 }
