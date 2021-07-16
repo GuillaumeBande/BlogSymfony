@@ -68,3 +68,17 @@ a{
     list-style-type: none;
     font-size: 1.3em;
 }
+.flash-success {
+    text-align: center;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    color: white;
+    background-color: lightgreen;
+    font-size: 20px;
+}
+.deconnexion{
+    color: red;
+}
+.float-right{
+    float: right;
+}

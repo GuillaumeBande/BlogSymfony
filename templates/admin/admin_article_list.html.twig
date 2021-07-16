@@ -6,8 +6,13 @@
 
 
 {% block main %}
+    <a class="deconnexion float-right" href="{{ path('app_logout') }}">Se deconnecter</a>
+    <p><a class="float-right" href="{{ path('AdminInsert' ) }}">Ajouter un nouvel article</a></p>
+
+
     <h1 class="title">Il y a {{ articles | length }} articles dans la base de données</h1>
     <div class="articles-container">
+
         {% for article in articles %}
             {% if article.isPublished %}
                 <article class="article">
@@ -23,6 +28,5 @@
                 </article>
             {% endif %}
         {% endfor %}
-        <p><a href="{{ path('AdminInsert' ) }}">Ajouter un nouvel article</a></p>
     </div>
 {% endblock main %}

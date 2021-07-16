@@ -6,6 +6,8 @@
 
 
 {% block main %}
+    <a class="" href="{{ path('app_login') }}">Se connecter</a>
+
     <h1 class="title">Il y a {{ articles | length }} articles dans la base de données</h1>
     <div class="articles-container">
         {% for article in articles %}

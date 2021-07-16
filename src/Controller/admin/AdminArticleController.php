@@ -30,6 +30,14 @@ class AdminArticleController extends AbstractController
 
        //Si tous les champs sont remplis et que le formulaire a correctement été remplis, on envois le formulaire
         if ( $articleForm->isSubmitted() && $articleForm->isValid()) {
+
+            // permet de stocker en session un message flash, dans le but de l'afficher
+            // sur la page suivante
+            $this->addFlash(
+                'success',
+                'L\'article '. $article->getTitle().' a bien été créé !'
+            );
+
             $entityManager->persist($article);
             $entityManager->flush();
             //on le renvoi vers la route d'affichage de la liste des articles d'admin
@@ -89,6 +97,12 @@ public function deleteArticle($id, ArticleRepository  $articleRepository, Entity
 
     $entityManager->remove($article);
     $entityManager->flush();
+
+    $this->addFlash(
+        'success',
+        'L\'article '. $article->getTitle().' a bien été supprimé !'
+    );
+
 
     return $this->redirectToRoute('AdminArticleList');
 }
